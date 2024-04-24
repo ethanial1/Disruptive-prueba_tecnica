@@ -1,0 +1,3 @@
+class Permisos {
+  async validate() {}
+}
