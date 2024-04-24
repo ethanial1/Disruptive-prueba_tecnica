@@ -10,9 +10,12 @@ const ContenidoSchema = new Schema(
       type: String,
       required: true,
     },
-    tipo: {
+    titulo: {
       type: String,
       required: true,
+    },
+    descripcion: {
+      type: String,
     },
     contenido: {
       type: String,
@@ -22,6 +25,10 @@ const ContenidoSchema = new Schema(
       type: String,
       required: true,
     },
+    createdBy: {
+      type: String,
+      required: true,
+    }
   },
   { timestamps: true }
 );

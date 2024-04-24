@@ -12,9 +12,6 @@ const CategorySchema = new Schema(
       unique: true,
       required: true,
     },
-    imagen: {
-      type: String,
-    }
   },
   { timestamps: true }
 );

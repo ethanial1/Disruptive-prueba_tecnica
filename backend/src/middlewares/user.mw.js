@@ -14,12 +14,12 @@ export class UserMiddleware {
     if (erros.length) {
       return res.status(400).json({success: false, message: 'Error', payload: erros})
     }
-
+    req.body.email = req.body.email.toLowerCase();
     next();
   }
 
   static register(req, res, next) {
-    const { username, password, email } = req.body;
+    const { username, password, email, type } = req.body;
     const erros = [];
 
     if (!username || !username?.trim()) {
@@ -34,10 +34,15 @@ export class UserMiddleware {
       erros.push('Correo: Debe de ser un correo válido');
     }
 
+    if (!['lector', 'creador'].includes(type)) {
+      erros.push('El tipo de usuarios no es válido');
+    }
+
     if (erros.length) {
       return res.status(400).json({success: false, message: 'Error', payload: erros})
     }
 
+    req.body.email = req.body.email.toLowerCase();
     next();
   }
 }

@@ -1,24 +1,37 @@
 import { Router } from 'express';
-import { registerUserController } from './auth.controller.js';
+import passport from 'passport';
+import { loginController, registerUserController } from './auth.controller.js';
 import { UserMiddleware } from '../middlewares/user.mw.js';
-import { createCategoryController } from './categoria.controller.js';
-import { newCategoryDTO } from '../middlewares/category.mw.js';
-import { createTematicaController } from './tematica.controller.js';
-import { bibliotecaMw } from '../middlewares/biblioteca.mw.js';
-import { bibliotectaController } from './bibloteca.controller.js';
+import {
+  createCategoryController,
+  createTematicaController,
+  removeCategoryController,
+  getCategoriesController,
+  getTematicasController,
+} from './categoria.controller.js';
+import { getContentValidator } from '../middlewares/biblioteca.js';
+import { addContentController, getContentController } from './bibloteca.controller.js';
+import { newCategoryValidator } from '../middlewares/category.js';
 
 const router = Router();
 
-router.post('/auth/login', UserMiddleware.login, registerUserController);
+router.post('/auth/login', UserMiddleware.login, loginController);
 router.post('/auth/register', UserMiddleware.register, registerUserController);
 
-// categoria
-router.post('/category/add-one', newCategoryDTO, createCategoryController);
+router.use(passport.authenticate('jwt', { session: false }))
 
-// tematica
-router.post('/tematica/add-one', newCategoryDTO, createTematicaController);
+router.post('/category/add-one', newCategoryValidator, createCategoryController);
+router.get('/category/list', getCategoriesController);
+router.delete('/category/remove', removeCategoryController);
 
-// biblioteca
-router.get('/biblioteca', bibliotecaMw, bibliotectaController)
+router.post('/tematica/add-one', newCategoryValidator, createTematicaController);
+router.get('/tematica/list', getTematicasController);
+router.put('/tematica/update');
+router.delete('/tematica/remove');
+
+router.get('/biblioteca', getContentValidator, getContentController)
+router.post('/biblioteca/add', addContentController);
+router.put('/biblioteca/update-item');
+router.delete('/biblioteca/remove-item');
 
 export default router;

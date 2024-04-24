@@ -12,6 +12,9 @@ const TematicaSchema = new Schema(
       unique: true,
       required: true,
     },
+    imagen: {
+      type: String,
+    },
     permisos: {
       type: [String],
       required: true,

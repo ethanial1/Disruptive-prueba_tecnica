@@ -1,7 +1,8 @@
-import { registerUser } from '../services/auth.service.js';
+import { login, registerUser } from '../services/auth.service.js';
 
-export async function login(req, res) {
-  return res.status(200).json({success: true})
+export async function loginController(req, res) {
+  const result = await login(req.body);
+  return res.status(200).json(result);
 }
 
 export async function registerUserController(req, res) {
