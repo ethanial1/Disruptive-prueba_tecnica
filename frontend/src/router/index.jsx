@@ -1,7 +1,8 @@
 import { createBrowserRouter } from "react-router-dom";
 import { ErrorView } from "../views/ErrorView";
 import { MainView } from "../views/MainView";
-import { TematicaView } from "../views/TematicaView";
+import { TematicaGrid } from "../features/tematica/TematicaGrid";
+import { TematicasGrid } from "../features/tematica/TematicasGrid";
 
 export const router = createBrowserRouter([
   {
@@ -10,8 +11,12 @@ export const router = createBrowserRouter([
     errorElement: <ErrorView />,
     children: [
       {
+        path: "/",
+        element: <TematicasGrid />,
+      },
+      {
         path: "/tematica",
-        element: <TematicaView />,
+        element: <TematicaGrid />,
       },
     ]
   },

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { CircleButton } from "../../components/button/CircleButton";
 import { SeachInput } from "../../components/search/SearchInput";
 import { SelectOptions } from "../../components/select/SelectOptions";
@@ -7,6 +8,7 @@ import { AddTematicaForm } from "../tematica/AddTematicaForm";
 
 export function SearchHeader() {
   const [showNewTematica, setShowNewTematica] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <>
@@ -26,7 +28,11 @@ export function SearchHeader() {
             className="d-flex haxis-space-between vaxis-center"
             style={{height: 100}}
           >
-            <h5 className="f-title">Deportes</h5>
+            <div className="d-flex vaxis-center">
+              <CircleButton icon="bx-chevron-left" handleClick={() => navigate(-1)} />
+              <div style={{width: 5}}></div>
+              <h5 className="f-title">Deportes</h5>
+            </div>
             <div className="d-flex vaxis-center">
               <SelectOptions />
               <div style={{width: 5}}></div>
