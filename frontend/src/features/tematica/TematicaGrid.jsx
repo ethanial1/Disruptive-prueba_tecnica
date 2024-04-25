@@ -1,24 +1,12 @@
 import { FileCard } from "../../components/file/FileCard";
+import { useAppStore } from "../../store/app.store";
 
 export function TematicaGrid() {
+  const biblioteca = useAppStore((state) => state.biblioteca);
+
   return (
     <div className="grid_spacer_slot max-view-lg">
-      <FileCard category="text" />
-      <FileCard category="imagen" />
-      <FileCard category="video" />
-      <FileCard category="Text" />
-      <FileCard category="text" />
-      <FileCard category="imagen" />
-      <FileCard category="video" />
-      <FileCard category="Text" />
-      <FileCard category="text" />
-      <FileCard category="imagen" />
-      <FileCard category="video" />
-      <FileCard category="Text" />
-      <FileCard category="text" />
-      <FileCard category="imagen" />
-      <FileCard category="video" />
-      <FileCard category="Text" />
+      {biblioteca.map((item) => <FileCard key={item._id} category="text" />)}
     </div>
   )
 }
