@@ -7,6 +7,8 @@ import { AddTematicaForm } from "./AddTematicaForm";
 
 export function TematicaArrowOptions() {
   const userActive = useAppStore((state) => state.user);
+  const tematica = useAppStore((state) => state.tematica);
+
   const [showNewTematica, setShowNewTematica] = useState(false);
   const navigate = useNavigate();
 
@@ -19,19 +21,27 @@ export function TematicaArrowOptions() {
         style={{ height: 100 }}
       >
         <div className="d-flex vaxis-center">
-          <CircleButton icon="bx-chevron-left" handleClick={() => navigate(-1)} />
-          <div style={{ width: 5 }}></div>
-          <h5 className="f-title">Deportes</h5>
+          {tematica &&
+            <>
+              <CircleButton icon="bx-chevron-left" handleClick={() => navigate(-1)} />
+              <div style={{ width: 5 }}></div>
+            </>
+          }
+          <h5 className="f-title">{tematica?.nombre ? tematica.nombre : 'Temáticas Disponibles'}</h5>
         </div>
         <div className="d-flex vaxis-center">
-          <SelectOptions />
+          {tematica && <SelectOptions />}
           <div style={{ width: 5 }}></div>
           <CircleButton
             icon="bx-plus"
             handleClick={() => setShowNewTematica(true)}
           />
-          <div style={{ width: 5 }}></div>
-          <CircleButton icon="bxs-cloud-upload" />
+          {tematica &&
+            <>
+              <div style={{ width: 5 }}></div>
+              <CircleButton icon="bxs-cloud-upload" />
+            </>
+          }
           <div style={{ width: 5 }}></div>
           <CircleButton icon="bxs-exit" />
         </div>

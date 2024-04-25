@@ -15,7 +15,7 @@ export const router = createBrowserRouter([
         element: <TematicasGrid />,
       },
       {
-        path: "/tematica",
+        path: "/tematica/:type",
         element: <TematicaGrid />,
       },
     ]

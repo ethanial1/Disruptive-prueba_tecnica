@@ -19,7 +19,7 @@ export const tematicaSlice = (set) => ({
   tematicas: [],
   statistics: {},
 
-  tematica: {},
+  tematica: null,
   biblioteca: [],
 
   getTematicas: async () => {

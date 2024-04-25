@@ -2,20 +2,18 @@ import { SeachInput } from "../../components/search/SearchInput";
 import { Statistic } from "../../components/statistic/Statistic";
 import { LoginArrow } from "../auth/LoginArrow";
 import { TematicaArrowOptions } from "../tematica/TematicaArrowOptions";
+import { UserCard } from "../user/UserCard";
 
 export function SearchHeader() {
   return (
     <>
       <div className="search_header">
         <div className="search_header_cover">
-          <img src="assets/mexico.png" alt="imagen-fondo" />
+          <img src="/assets/mexico.png" alt="imagen-fondo" />
         </div>
         <div className="max-view-md search_header_data">
           <div className="d-flex haxis-space-between vaxis-center">
-            <div>
-              <h5 className="f-title">Hola, Miguel</h5>
-              <span className="f-subtitle">miguel@gmail.com</span>
-            </div>
+            <UserCard />
             <SeachInput searchButton={true} placeholder="Buscar temática" />
           </div>
           <LoginArrow />
