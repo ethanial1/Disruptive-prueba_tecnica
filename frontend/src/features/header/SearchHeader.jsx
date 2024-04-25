@@ -1,8 +1,8 @@
-import { SeachInput } from "../../components/search/SearchInput";
 import { Statistic } from "../../components/statistic/Statistic";
 import { LoginArrow } from "../auth/LoginArrow";
 import { TematicaArrowOptions } from "../tematica/TematicaArrowOptions";
 import { UserCard } from "../user/UserCard";
+import { SearchHeaderInput } from "./SeachHeaderInput";
 
 export function SearchHeader() {
   return (
@@ -14,7 +14,7 @@ export function SearchHeader() {
         <div className="max-view-md search_header_data">
           <div className="d-flex haxis-space-between vaxis-center">
             <UserCard />
-            <SeachInput searchButton={true} placeholder="Buscar temática" />
+            <SearchHeaderInput />
           </div>
           <LoginArrow />
           <TematicaArrowOptions />

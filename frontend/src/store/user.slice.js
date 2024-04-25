@@ -9,24 +9,38 @@ import { isEmailValid} from "../utils/data";
 
 export const userSlice = (set) => ({
   user: null,
-  authMessage: '',
+  message: '',
   authLoading: false,
 
   loginMethod: async (email, pass) => {
-    set(() => ({authMessage: "", authLoading: true}) )
+    set(() => ({message: "", authLoading: true}) )
 
     if (!isEmailValid(email) || !pass) {
-      set(() => ({authMessage: "Ingrese un correo/contraseña validos", authLoading: false}) )
+      set(() => ({message: "Ingrese un correo/contraseña validos", authLoading: false}) )
       return;
     }
 
     const data = await service.login(email, pass);
     if (data.message) {
-      set(() => ({authMessage: data.message, authLoading: false}) )
+      set(() => ({message: data.message, authLoading: false}) )
       return;
     }
 
     const result = await service.getTematicas();
     set(() => ({user: {username: 'miguel', email: 'miguel@gmail.com'}, tematicas: result, authLoading: false }));
+  },
+  registerUser: async (username, email, pass, type) => {
+    set(() => ({message: "", authLoading: true}) )
+    if (!isEmailValid(email) || !pass || !username || !type) {
+      set(() => ({message: "Ingrese un correo/contraseña validos", authLoading: false}) )
+      return;
+    }
+
+    const data = await service.register(username, email, pass, type);
+    if (data.message) {
+      set(() => ({message: data.message, authLoading: false}) )
+      return;
+    }
+    set(() => ({message: 'Registro exitoso', authLoading: false }));
   }
 });

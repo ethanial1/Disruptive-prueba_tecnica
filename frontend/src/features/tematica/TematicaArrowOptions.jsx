@@ -4,13 +4,25 @@ import { CircleButton } from "../../components/button/CircleButton";
 import { SelectOptions } from "../../components/select/SelectOptions";
 import { useAppStore } from "../../store/app.store";
 import { AddTematicaForm } from "./AddTematicaForm";
+import { AddContentForm } from "../biblioteca/AddContentForm";
 
 export function TematicaArrowOptions() {
   const userActive = useAppStore((state) => state.user);
   const tematica = useAppStore((state) => state.tematica);
+  const setTematicaActiva = useAppStore((state) => state.setTematicaActiva);
 
-  const [showNewTematica, setShowNewTematica] = useState(false);
+  const [showModals, setShowModals] = useState({tematica: false, contenido: false});
   const navigate = useNavigate();
+
+  function handleBack() {
+    setTematicaActiva(null);
+    navigate(-1);
+  }
+
+  function handleModals(type, val) {
+    showModals[type] = val;
+    setShowModals({...showModals});
+  }
 
   if (!userActive) return <span></span>
 
@@ -23,7 +35,7 @@ export function TematicaArrowOptions() {
         <div className="d-flex vaxis-center">
           {tematica &&
             <>
-              <CircleButton icon="bx-chevron-left" handleClick={() => navigate(-1)} />
+              <CircleButton icon="bx-chevron-left" handleClick={handleBack} />
               <div style={{ width: 5 }}></div>
             </>
           }
@@ -32,14 +44,17 @@ export function TematicaArrowOptions() {
         <div className="d-flex vaxis-center">
           {tematica && <SelectOptions />}
           <div style={{ width: 5 }}></div>
-          <CircleButton
+          {!tematica && <CircleButton
             icon="bx-plus"
-            handleClick={() => setShowNewTematica(true)}
-          />
+            handleClick={() => handleModals('tematica', true)}
+          />}
           {tematica &&
             <>
               <div style={{ width: 5 }}></div>
-              <CircleButton icon="bxs-cloud-upload" />
+              <CircleButton
+                icon="bxs-cloud-upload"
+                handleClick={() => handleModals('contenido', true)}
+              />
             </>
           }
           <div style={{ width: 5 }}></div>
@@ -47,8 +62,12 @@ export function TematicaArrowOptions() {
         </div>
       </div>
       <AddTematicaForm
-        visible={showNewTematica}
-        handleClose={() => setShowNewTematica(false)}
+        visible={showModals.tematica}
+        handleClose={() => handleModals('tematica', false)}
+      />
+      <AddContentForm
+        visible={showModals.contenido}
+        handleClose={() => handleModals('contenido', false)}
       />
     </>
   );

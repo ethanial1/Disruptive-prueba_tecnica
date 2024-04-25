@@ -103,6 +103,25 @@ export class Service {
     }
   }
 
+  async register(username, email, password, type) {
+    try {
+      const result = await this.getResource({
+        url: 'auth/register',
+        method: 'POST',
+        data: {username, email, password, type}
+      });
+
+      const data = result.data;
+      if (!data?.success) {
+        return {message: Array.isArray(data.payload) ? data.payload.join(',') : data.message};
+      }
+
+      return {success: true}
+    } catch (error) {
+      return {message: 'Ocurrio un error'};
+    }
+  }
+
   async getTematicas() {
     try {
       const result = await this.getResource({
@@ -118,12 +137,48 @@ export class Service {
     }
   }
 
-  async getContenido() {
+  async addTematica(data) {
+    try {
+      const result = await this.getResource({
+        data,
+        token: true,
+        method: 'POST',
+        url: 'tematica/add-one'
+      });
+
+      return result.data;
+    } catch (error) {
+      return {message: 'Ocurrio un error'}
+    }
+  }
+
+  async getContenido(tematica, category) {
     try {
       const result = await this.getResource({
         token: true,
-        method: 'GET',
-        url: 'tematica/list'
+        method: 'POST',
+        url: 'biblioteca',
+        data: {tematica, category}
+      });
+
+      return result.data;
+    } catch (error) {
+      return {success: false, message: error.toString()}
+    }
+  }
+
+  /**
+   *
+   * @param {tematica, categoria, contenido} data
+   * @returns
+   */
+  async addContenido(data) {
+    try {
+      const result = await this.getResource({
+        token: true,
+        method: 'POST',
+        url: 'biblioteca/add',
+        data,
       });
 
       return result.data;

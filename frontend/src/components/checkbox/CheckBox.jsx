@@ -1,9 +1,9 @@
 import './checkbox.css';
 
-export function CheckBox({ id, title }) {
+export function CheckBox({ id, name, value, title }) {
   return (
     <div className="checkbox-wrapper-4">
-      <input className="inp-cbx" id={id} type="checkbox"/>
+      <input className="inp-cbx" name={name} value={value} id={id} type="checkbox"/>
       <label className="cbx" htmlFor={id}>
         <span>
           <svg width="12px" height="10px">

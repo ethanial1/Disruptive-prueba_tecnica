@@ -15,7 +15,7 @@
   object-fit: cover;
 }
 .file_card_inner_text {
-  padding: 20px;
+  padding: 10px 20px;
 }
 .file_card_inner_category {
   display: block;

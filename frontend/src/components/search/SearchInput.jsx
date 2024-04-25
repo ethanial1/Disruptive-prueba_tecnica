@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import './search.css';
 
-export function SeachInput({ placeholder, searchButton, border }) {
+export function SeachInput({ placeholder, searchButton, border, onSubmit }) {
   const [text, setText] = useState('');
 
   function handleSubmit(e) {
     e.preventDefault();
+    onSubmit(text);
     setText('');
   }
 

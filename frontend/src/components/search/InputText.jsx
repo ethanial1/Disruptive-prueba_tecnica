@@ -1,7 +1,7 @@
 export function InputText({id, inputType, readOnly, label, value, placeHolder, onChange}) {
   return (
     <div>
-      <label htmlFor={id}>{label}</label>
+      <label htmlFor={id} className="f-subtitle">{label}</label>
       <div className="search_slot" style={{boxShadow: 'var(--box-shadow-md)'}}>
         <input
           id={id}
