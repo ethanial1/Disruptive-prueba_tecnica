@@ -1,0 +1,17 @@
+.max-view-md {
+  margin: auto;
+  max-width: var(--max-width-md);
+}
+.max-view-lg {
+  margin: auto;
+  max-width: var(--max-width-lg);
+}
+.d-flex {
+  display: flex;
+}
+.haxis-space-between {
+  justify-content: space-between;
+}
+.vaxis-center {
+  align-items: center;
+}

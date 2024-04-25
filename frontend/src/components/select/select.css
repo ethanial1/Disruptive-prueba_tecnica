@@ -1,0 +1,6 @@
+.select_options {
+  outline: none;
+  border: none;
+  padding: 10px;
+  border-radius: var(--border-radius-lg);
+}

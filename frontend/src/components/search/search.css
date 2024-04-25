@@ -1,0 +1,13 @@
+.search_slot {
+  height: 35px;
+  border-radius: 30px;
+  overflow: hidden;
+  background-color: var(--color-base-white);
+}
+.search_slot input {
+  outline: none;
+  border: none;
+  height: 35px;
+  padding: 0 10px;
+  background: transparent;
+}

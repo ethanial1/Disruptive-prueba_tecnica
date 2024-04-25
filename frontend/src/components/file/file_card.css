@@ -1,0 +1,26 @@
+.file_card_inner {
+  background: white;
+  border-radius: 8px;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+  height: 300px;
+  overflow: hidden;
+  cursor: pointer;
+}
+.file_card_inner_img {
+  height: 50%;
+}
+.file_card_inner_img img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+.file_card_inner_text {
+  padding: 20px;
+}
+.file_card_inner_category {
+  display: block;
+  margin: 1rem 0;
+  color: var(--color-tierra);
+  font-size: smaller;
+  text-transform: capitalize;
+}

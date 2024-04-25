@@ -1,0 +1,21 @@
+.circle_button {
+  height: 37px !important;
+  width: 37px !important;
+  background-color: white !important;
+  border-radius: var(--border-radius-lg);
+}
+
+.circle_button i {
+  font-size: 20px;
+}
+
+.button_icon {
+  width: auto !important;
+  padding: 5px 10px !important;
+  box-shadow: var(--box-shadow-md);
+  background-color: white !important;
+  border-radius: var(--border-radius-lg);
+}
+.button_icon i {
+  font-size: 20px;
+}
