@@ -1,6 +1,6 @@
 export class UserMiddleware {
   static login(req, res, next) {
-    const { email, password } = req.body;
+    const { email, password } = req?.body;
     const erros = [];
 
     if (!password || password.length < 5) {
