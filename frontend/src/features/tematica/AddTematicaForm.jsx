@@ -5,9 +5,11 @@ import { ModalBox } from "../../components/modal/ModalBox";
 import { useAppStore } from "../../store/app.store";
 import { InputText } from "../../components/search/InputText";
 
+const initState = { nombre: '', permisos: [], imagen: '' };
+
 export function AddTematicaForm({ visible, handleClose }) {
   const addTematica = useAppStore((state) => state.addTematica);
-  const [formData, setFormData] = useState({ nombre: '', permisos: [] })
+  const [formData, setFormData] = useState(initState);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -16,16 +18,26 @@ export function AddTematicaForm({ visible, handleClose }) {
     target.querySelectorAll('input[type=checkbox]:checked').forEach((item) => {
       permisos.push(item.value)
     })
+    if (!permisos.length) return;
 
     formData.permisos = permisos;
     setFormData(formData)
-    addTematica(formData);
+    addTematica({...formData});
+
+    setFormData(initState);
     handleClose();
   }
 
   return (
     <ModalBox title="Nueva temática" visible={visible} handleClose={handleClose} >
       <form id="tematica-form-slot" onSubmit={handleSubmit}>
+      <InputText
+          id="tenamtica-name"
+          label="Url Portada"
+          placeHolder="https://"
+          onChange={(e) => setFormData({...formData, imagen: e.target.value})}
+        />
+        <div style={{height: 20}}></div>
         <InputText
           id="tenamtica-name"
           label="Nombre"

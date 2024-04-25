@@ -1,12 +1,13 @@
 import { useState } from "react"
 import './select.css';
 
-export function SelectOptions({title, lista, handleChange}) {
+export function SelectOptions({handleChange}) {
   const [option, setOption] = useState('');
 
   function onChange(e) {
     const value = e.target.value;
     setOption(value);
+    handleChange(value);
   }
 
   return (

@@ -41,7 +41,6 @@ export const bibliotecaSlice = (set, get) => ({
     const regex = RegExp(name);
 
     const lista = get().biblioteca;
-    if (!lista.length) return;
 
     if (!bibliotecaVault.length) {
       bibliotecaVault = lista;
@@ -56,5 +55,17 @@ export const bibliotecaSlice = (set, get) => ({
     if (!filter) return;
 
     set(() => ({biblioteca: bibliotecaVault, filterBibliotecaActive: ''}))
+  },
+
+  filterBibliotecaByType: (type) => {
+    type = type.toLowerCase();
+    const lista = get().biblioteca;
+
+    if (!bibliotecaVault.length) {
+      bibliotecaVault = lista;
+    }
+    console.log(type)
+    const newList = bibliotecaVault.filter((item) => item?.categoria === type);
+    set(() => ({biblioteca: newList, filterBibliotecaActive: type}));
   }
 })

@@ -13,7 +13,7 @@ export function TematicasGrid() {
 
   useEffect(() => {
     getTematicas()
-  })
+  }, []);
 
   function handleTematica(data) {
     setTematicaActiva(data);
@@ -24,9 +24,9 @@ export function TematicasGrid() {
     <>
       {message && <div className='max-view-md'><AlertBox title="Alerta" body={message} type="warning" /></div>}
       <div className="grid_spacer_slot max-view-lg">
-        {tematicas.map((item) =>
-          <Link key={item.unombre} to={`/tematica/${item.unombre}`} onClick={() => handleTematica(item)}>
-            <FileCard title={item.nombre} />
+        {tematicas.map((item, index) =>
+          <Link key={index + item.unombre} to={`/tematica/${item.unombre}`} onClick={() => handleTematica(item)}>
+            <FileCard showImage title={item.nombre} content={item.imagen} />
           </Link>
         )}
       </div>

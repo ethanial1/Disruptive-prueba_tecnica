@@ -1,10 +1,10 @@
 import './file_card.css';
 
-export function FileCard({ content, category, title, credito }) {
+export function FileCard({ content, category, title, credito, showImage }) {
   return (
     <div className='file_card'>
       <div className='file_card_inner'>
-        {category === 'imagen' && <div className='file_card_inner_img'>
+        {(category === 'imagen' || showImage) && <div className='file_card_inner_img'>
           <img src={content} alt="Imagen" />
         </div>}
         {category === 'video' && <VideoIframe url={content} />}

@@ -10,6 +10,7 @@ export function TematicaArrowOptions() {
   const userActive = useAppStore((state) => state.user);
   const tematica = useAppStore((state) => state.tematica);
   const setTematicaActiva = useAppStore((state) => state.setTematicaActiva);
+  const filterByType = useAppStore((state) => state.filterBibliotecaByType);
 
   const [showModals, setShowModals] = useState({tematica: false, contenido: false});
   const navigate = useNavigate();
@@ -42,7 +43,7 @@ export function TematicaArrowOptions() {
           <h5 className="f-title">{tematica?.nombre ? tematica.nombre : 'Temáticas Disponibles'}</h5>
         </div>
         <div className="d-flex vaxis-center">
-          {tematica && <SelectOptions />}
+          {tematica && <SelectOptions handleChange={filterByType} />}
           <div style={{ width: 5 }}></div>
           {!tematica && <CircleButton
             icon="bx-plus"

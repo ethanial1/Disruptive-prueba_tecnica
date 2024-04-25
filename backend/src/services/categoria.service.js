@@ -41,7 +41,7 @@ class CategoriaService {
 
   async createTematica(data) {
     try {
-      const { nombre, permisos } = data;
+      const { nombre, permisos, imagen } = data;
       const unombre = vaciarCaracteres(nombre);
 
       const utema = await tematicaModel.findOne({ unombre });
@@ -49,10 +49,10 @@ class CategoriaService {
         return {success: false, message: 'La temática ya existe'};
       }
 
-      const newTema = new tematicaModel({ nombre, unombre, permisos });
+      const newTema = new tematicaModel({ nombre, unombre, permisos, imagen });
       await newTema.save();
 
-      return { success: true };
+      return { success: true, payload: { nombre, unombre } };
     } catch (error) {
       return { success: false, message: error.toString() };
     }

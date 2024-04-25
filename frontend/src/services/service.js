@@ -97,7 +97,9 @@ export class Service {
       localStorage.setItem(aToken, data.payload.accessToken);
       localStorage.setItem(rToken, data.payload.refreshToken);
 
-      return {user: true}
+      const user = await this.getUserInfo();
+
+      return user
     } catch (error) {
       return {message: 'Ocurrio un error'};
     }
@@ -179,6 +181,35 @@ export class Service {
         method: 'POST',
         url: 'biblioteca/add',
         data,
+      });
+
+      return result.data;
+    } catch (error) {
+      return {success: false, message: error.toString()}
+    }
+  }
+
+  async getContentStatistic(data) {
+    try {
+      const result = await this.getResource({
+        token: true,
+        method: 'POST',
+        url: '/biblioteca/static',
+        data,
+      });
+
+      return result.data;
+    } catch (error) {
+      return {success: false, message: error.toString()}
+    }
+  }
+
+  async getUserInfo() {
+    try {
+      const result = await this.getResource({
+        token: true,
+        method: 'POST',
+        url: '/user/info',
       });
 
       return result.data;

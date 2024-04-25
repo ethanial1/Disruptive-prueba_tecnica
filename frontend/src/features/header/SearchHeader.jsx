@@ -1,8 +1,9 @@
-import { Statistic } from "../../components/statistic/Statistic";
+
 import { LoginArrow } from "../auth/LoginArrow";
 import { TematicaArrowOptions } from "../tematica/TematicaArrowOptions";
 import { UserCard } from "../user/UserCard";
 import { SearchHeaderInput } from "./SeachHeaderInput";
+import { StatisticRow } from "./StaticticsRow";
 
 export function SearchHeader() {
   return (
@@ -18,11 +19,7 @@ export function SearchHeader() {
           </div>
           <LoginArrow />
           <TematicaArrowOptions />
-          <div className="d-flex search_header_statistics">
-            <Statistic icon="bxs-video" title="Videos" value="+100" />
-            <Statistic icon="bxs-image-alt" title="Imágenes" value="57" />
-            <Statistic icon="bx-text" title="Textos" value="28" />
-          </div>
+          <StatisticRow />
         </div>
       </div>
     </>

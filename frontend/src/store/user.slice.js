@@ -21,13 +21,14 @@ export const userSlice = (set) => ({
     }
 
     const data = await service.login(email, pass);
-    if (data.message) {
+    console.log(data)
+    if (data.message || !data.success) {
       set(() => ({message: data.message, authLoading: false}) )
       return;
     }
-
+    console.log(data)
     const result = await service.getTematicas();
-    set(() => ({user: {username: 'miguel', email: 'miguel@gmail.com'}, tematicas: result, authLoading: false }));
+    set(() => ({user: data.payload, tematicas: result, authLoading: false }));
   },
   registerUser: async (username, email, pass, type) => {
     set(() => ({message: "", authLoading: true}) )

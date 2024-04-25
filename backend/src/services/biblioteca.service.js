@@ -3,9 +3,9 @@ import { contenidoModel, tematicaModel } from "../models/index.js";
 class BibliotecaService {
   async addContent(user, body) {
     try {
-      const { tematica, categoria, contenido } = body;
+      const { tematica, categoria, contenido, titulo } = body;
       const temaData = await tematicaModel.findOne({
-        _id: tematica,
+        unombre: tematica,
         permisos: categoria
       });
       if (!temaData) {
@@ -16,6 +16,7 @@ class BibliotecaService {
       }
 
       const file = new contenidoModel({
+        titulo,
         categoria,
         contenido,
         createdBy: user.id,
@@ -38,8 +39,25 @@ class BibliotecaService {
 
       if (categoria) query.categoria = categoria;
 
-      const lista = await contenidoModel.find(query).select('title contenido credito categoria')
+      const lista = await contenidoModel.find(query).select('titulo contenido credito categoria')
       return {success: true, payload: lista};
+    } catch (error) {
+      return {success: false}
+    }
+  }
+
+  async getGeneralStatistics(body) {
+    try {
+      const tematica = body.tematica;
+      const querys = [{$group: {_id: "$categoria", count: {$sum: 1}}}];
+
+      if (tematica) {
+        querys.unshift({ "$match": { "tematica": tematica }})
+      }
+
+      const result = await contenidoModel.aggregate(querys);
+
+      return {success: true, payload: result}
     } catch (error) {
       return {success: false}
     }

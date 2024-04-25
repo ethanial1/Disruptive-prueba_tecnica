@@ -12,7 +12,7 @@ let tematicasVault = [];
 export const tematicaSlice = (set, get) => ({
   tematicas: [],
   filterTematicaActive: '',
-  statistics: {},
+  statistics: [],
   requestStatus: false,
 
   tematica: null,
@@ -62,6 +62,14 @@ export const tematicaSlice = (set, get) => ({
     if (!filter) return;
 
     set(() => ({tematicas: tematicasVault, filterTematicaActive: ''}))
+  },
+  getStatistics: async (tematica) => {
+    const result = await service.getContentStatistic({tematica});
+    if (!result?.success) {
+      return set(() => ({statistics: []}));
+    }
+
+    set(() => ({statistics: result.payload}))
   }
 });
 
